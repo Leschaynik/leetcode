@@ -1,0 +1,76 @@
+class Solution(object):
+    #1
+    
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+
+        #отсеиваем очевидные случаи 1
+        if x<0:
+            return False
+        
+        # определям кол-во разрядов
+        f1=True
+        length=0
+        while f1:
+            length+=1
+            if x%(10**length)==x:
+                f1=False
+
+        #отсеиваем очевидные случаи 2
+        if length==2 and x%11!=0:
+            return False
+
+        # сравниваем числа с начала и конца
+        for i in range(length//2):
+
+            k1=i
+            k2=length-i-1
+            
+            if x//(10**k1)%10==x//(10**k2)%10:
+                continue
+            else:
+                return False
+
+        return True
+    
+
+    #после прочтения чужих решений
+    '''
+    #воссоздать число в обратном порядке
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        if x<0: return False
+
+        inputNum=x
+        revNum=0
+        while inputNum:
+            revNum=revNum*10+inputNum%10
+            inputNum//=10
+        
+        return revNum==x
+    '''
+    '''
+    #воссоздать лишь половину числа
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        if x<0 or (x>0 and x%10==0): return False
+
+        inputNum=x
+        revNum=0
+        while inputNum>revNum:
+            revNum=revNum*10+inputNum%10
+            inputNum//=10
+        
+        return True if (inputNum==revNum or inputNum==revNum//10) else False
+        #inputNum==revNum - если кол-во разрдов чётно 11-> 1=1 
+        #inputNum==revNum//10 - если не чётно 121-> 1=12//10 
+    '''
