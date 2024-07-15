@@ -1,0 +1,104 @@
+class Solution(object):
+    #1.0
+    '''
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        def Roma_nums(num):
+            if num=='I': return 1
+            if num=='V': return 5
+            if num=='X': return 10
+            if num=='L': return 50
+            if num=='C': return 100
+            if num=='D': return 500
+            if num=='M': return 1000
+        
+        List=[int(Roma_nums(i)) for i in list(s)][::-1]
+
+        m=0 #наибольшее уже встретившееся число
+        arab_num=0
+        for i in List:
+            if m>i:
+                arab_num-=i
+                continue
+            m=i
+            arab_num+=i
+        
+        return arab_num
+    '''
+    #1.1
+    '''
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+
+        symbolToValue= {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+
+        List=[symbolToValue[i] for i in list(s)][::-1]
+
+        m=0 #наибольшее уже встретившееся число
+        arab_num=0
+        for i in List:
+            if m>i:
+                arab_num-=i
+                continue
+            m=i
+            arab_num+=i
+
+        return arab_num
+    '''
+
+    #1.2
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+
+        symbolToValue= {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+        '''
+        m=0 #наибольшее уже встретившееся число
+        arab_num=0
+        for i in reversed(s):
+            num=symbolToValue[i]
+            if m>symbolToValue[i]:
+                arab_num-=symbolToValue[i]
+                continue
+            m=symbolToValue[i]
+            arab_num+=symbolToValue[i]
+
+        return arab_num
+        '''
+        m=0 #наибольшее уже встретившееся число
+        arab_num=0
+        for i in reversed(s):
+            num=symbolToValue[i]
+            if m>num:
+                arab_num-=num
+                continue
+            m=num
+            arab_num+=symbolToValue[i]
+
+        return arab_num
+
+    
