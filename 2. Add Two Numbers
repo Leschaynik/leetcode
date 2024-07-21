@@ -1,0 +1,86 @@
+# Definition for singly-linked list.
+#class ListNode(object):
+#    def __init__(self, val=0, next=None):
+#        self.val = val # value - значение узла
+#        self.next = next # следующий узел
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+
+        '''
+        #выравнивание списков по длинне
+        if len(l1)>=len(l2):
+            l2.extend([0]*(len_l1-len_l2))
+        else:
+            l1.extend([0]*(len_l2-len_l1))
+
+        tens=0 #переходящее в следующий разряд при сложении
+        result=[]
+        for i in range(len(l1)):
+            num=l1[i]+l2[i]+tens
+            tens=num//10
+            result.append(num%10)
+        
+        if tens:
+            result.append(tens)
+        
+        return result
+        '''
+        '''
+        ### не понимаю как это работает, взял код из первого в топе решения
+        head=ListNode(0) #начальный разметочный узел
+        tail=head #последний узел
+        tens=0 
+
+        while l1 is not None or l2 is not None or tens!=0:
+            if l1: elem1=l1.val
+            else: elem1=0
+
+            if l2: elem2=l2.val
+            else: elem2=0
+
+            num=elem1+elem2+tens
+
+            newNode=ListNode(num%10)
+            tens=num//10
+
+            tail.next=newNode
+            tail=tail.next
+
+            if l1 is not None: l1=l1.next
+            else: l1=None
+
+            if l2 is not None: l2=l2.next
+            else: l2=None
+        
+        result=head.next
+        head.next=None
+        return result
+        '''
+
+        ###поси(е)дел над классами и связными списками, пришёл к тому же, что предложил другой человек
+        #1
+        tens=0
+        head=ListNode(0)
+        tail=head
+        while l1 is not None or l2 is not None or tens!=0:
+            #for _ in range(5):
+            #print(l1.val, l1.next.val if l1.next is not None else None, l2.val, l2.next.val if l2.next is not None else None, tens, tail.val)
+            term1=l1.val if l1 is not None else 0
+            term2=l2.val if l2 is not None else 0
+
+            _sum=term1+term2+tens
+
+            tail.next=ListNode(_sum%10)
+            tens=_sum//10
+            
+            tail=tail.next
+
+            l1=l1.next if l1 is not None else None
+            l2=l2.next if l2 is not None else None
+
+        return head.next
